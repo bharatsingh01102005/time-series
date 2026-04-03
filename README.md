@@ -1,21 +1,147 @@
 # 📈 Time Series Monitoring System
 
-A production-ready full-stack application natively built to track and visualize real-time CPU, Memory, Temperature, Visitors, and Uptime metrics dynamically via the MERN stack and Chart.js.
+A **production-ready full-stack monitoring dashboard** built using the MERN stack to track and visualize real-time system metrics like CPU usage, Memory consumption, Temperature, Visitors, and Uptime with dynamic charts and live updates.
 
-## Overview
-- **/client**: React, Vite, Chart.js, Axios
-- **/server**: Node.js, Express.js, MongoDB (Mongoose), Shell Scripts
+---
 
-## Setup Procedure
-1. Have MongoDB installed and running on `localhost:27017` locally.
-2. Navigate to `time-series-monitor/server/`.
-3. Start Backend: Run `node src/server.js` or `npm start`
-4. Navigate to `time-series-monitor/client/`.
-5. Start Frontend: Run `npm run dev`
-6. Open your local web browser dynamically pointed out by Vite to view the live dashboard.
+## 🚀 Features
 
-## Ingesting Data into System
-Submit a POST request to `http://localhost:5000/api/metrics` with standard HTTP JSON mapping:
+* 📡 Real-time metrics monitoring (CPU, Memory, Temperature, Visitors, Uptime)
+* 📊 Interactive data visualization with charts
+* 🔄 REST API for ingesting system metrics
+* ⏱️ Time-series data storage using MongoDB
+* 🧹 Automated cleanup of old data (30+ days)
+* ⚡ Fast frontend powered by Vite
+* 📈 Scalable architecture (client-server separation)
+
+---
+
+## 🏗️ Tech Stack
+
+### Frontend
+
+* React.js (Vite)
+* Chart.js
+* Axios
+
+### Backend
+
+* Node.js
+* Express.js
+* MongoDB (Mongoose)
+
+### Tools & Utilities
+
+* Shell scripting
+* REST APIs
+
+---
+
+## 📂 Project Structure
+
+```
+time-series-monitor/
+│
+├── client/          # React frontend (Vite + Chart.js)
+│
+├── server/          # Backend (Node.js + Express + MongoDB)
+│   ├── src/
+│   ├── scripts/
+│   │   └── cleanup.sh
+│
+└── README.md
+```
+
+---
+
+## ⚙️ Setup & Installation
+
+### 1️⃣ Prerequisites
+
+* Node.js (v16 or higher)
+* MongoDB running locally at:
+
+  ```
+  mongodb://localhost:27017
+  ```
+
+---
+
+### 2️⃣ Clone the Repository
+
+```
+git clone https://github.com/your-username/time-series-monitor.git
+cd time-series-monitor
+```
+
+---
+
+### 3️⃣ Backend Setup
+
+```
+cd server
+npm install
+```
+
+#### ▶️ Start Backend Server
+
+```
+npm start
+```
+
+OR
+
+```
+node src/server.js
+```
+
+Server runs on:
+
+```
+http://localhost:5000
+```
+
+---
+
+### 4️⃣ Frontend Setup
+
+```
+cd ../client
+npm install
+```
+
+#### ▶️ Start Frontend
+
+```
+npm run dev
+```
+
+Open the URL shown in terminal (usually):
+
+```
+http://localhost:5173
+```
+
+---
+
+## 📡 API Usage
+
+### ➤ Add Metrics Data
+
+**Endpoint:**
+
+```
+POST /api/metrics
+```
+
+**URL:**
+
+```
+http://localhost:5000/api/metrics
+```
+
+**Request Body:**
+
 ```json
 {
   "cpuUsage": 85,
@@ -26,5 +152,56 @@ Submit a POST request to `http://localhost:5000/api/metrics` with standard HTTP 
 }
 ```
 
-## Maintenance Script
-Execute `bash server/scripts/cleanup.sh` to remove legacy metric records older than 30 days.
+---
+
+## 🧹 Maintenance Script
+
+Remove records older than 30 days:
+
+```
+bash server/scripts/cleanup.sh
+```
+
+---
+
+## 📊 Future Enhancements
+
+* 🔌 Real-time updates using WebSockets (Socket.IO)
+* 🚨 Alert system (CPU/Temperature thresholds)
+* 📅 Time-range filtering (1h, 24h, 7d)
+* 🔐 Authentication (JWT)
+* 🐳 Docker support
+* ☁️ Cloud deployment (Vercel / Render)
+* 📉 Predictive analytics
+* 🌙 Dark mode UI
+
+---
+
+## 🖼️ Screenshots
+
+*Add your dashboard screenshots here*
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Feel free to fork the repository and submit a pull request.
+
+---
+
+## 📜 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 💡 Author
+
+Developed by **Your Name**
+
+---
+
+## ⭐ Support
+
+If you like this project, give it a ⭐ on GitHub!
