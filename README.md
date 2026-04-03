@@ -14,6 +14,18 @@ A production-ready full-stack application natively built to track and visualize 
 5. Start Frontend: Run `npm run dev`
 6. Open your local web browser dynamically pointed out by Vite to view the live dashboard.
 
+
+## Project Structure
+time-series-monitor/
+│
+├── client/          # Frontend (React + Vite)
+├── server/          # Backend (Node + Express)
+│   ├── src/         # Core server logic
+│   ├── scripts/     # Maintenance scripts
+│   └── models/      # MongoDB schemas
+│
+└── README.md
+
 ## Ingesting Data into System
 Submit a POST request to `http://localhost:5000/api/metrics` with standard HTTP JSON mapping:
 ```json
@@ -28,3 +40,10 @@ Submit a POST request to `http://localhost:5000/api/metrics` with standard HTTP 
 
 ## Maintenance Script
 Execute `bash server/scripts/cleanup.sh` to remove legacy metric records older than 30 days.
+
+## Future Improvements
+🔐 Authentication & Role-Based Access
+☁️ Cloud Deployment (AWS / Docker)
+🔔 Alert System (Email/SMS on threshold breach)
+📉 Advanced Analytics (AI/ML predictions)
+🌍 Multi-device monitoring support
