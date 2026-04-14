@@ -1,16 +1,17 @@
-const { validationResult } = require('express-validator');
 const Metric = require('../models/Metric');
+
+// ==============================================
+// Handles processing of time-series data
+// and sends structured API responses
+// ==============================================
 
 // @desc    Ingest new metrics
 // @route   POST /api/metrics
-const ingestMetrics = async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-        return res.status(400).json({ success: false, errors: errors.array() });
-    }
-
+const ingestMetrics = async (req, res) => {
     try {
+        // Extracting incoming metric data from request body
         const { cpuUsage, memoryUsage, temperature, visitors, uptime } = req.body;
+         console.log("Ingesting new metric data..."); // Debug log (safe)
         
         const metric = await Metric.create({
             cpuUsage,
@@ -22,24 +23,25 @@ const ingestMetrics = async (req, res, next) => {
 
         res.status(201).json({ success: true, data: metric });
     } catch (error) {
-        next(error);
+        res.status(400).json({ success: false, error: error.message });
     }
 };
 
 // @desc    Get real-time metrics (latest 50)
 // @route   GET /api/metrics/realtime
-const getRealtimeMetrics = async (req, res, next) => {
+const getRealtimeMetrics = async (req, res) => {
     try {
         const metrics = await Metric.find().sort({ timestamp: -1 }).limit(50);
+         // Reverse to maintain chronological order
         res.status(200).json({ success: true, data: metrics.reverse() });
     } catch (error) {
-        next(error);
+        res.status(500).json({ success: false, error: error.message });
     }
 };
 
 // @desc    Get hourly aggregated metrics
 // @route   GET /api/metrics/hourly
-const getHourlyMetrics = async (req, res, next) => {
+const getHourlyMetrics = async (req, res) => {
     try {
         const metrics = await Metric.aggregate([
             {
@@ -62,13 +64,13 @@ const getHourlyMetrics = async (req, res, next) => {
 
         res.status(200).json({ success: true, data: metrics });
     } catch (error) {
-        next(error);
+        res.status(500).json({ success: false, error: error.message });
     }
 };
 
 // @desc    Get daily aggregated metrics
 // @route   GET /api/metrics/daily
-const getDailyMetrics = async (req, res, next) => {
+const getDailyMetrics = async (req, res) => {
     try {
         const metrics = await Metric.aggregate([
             {
@@ -90,7 +92,7 @@ const getDailyMetrics = async (req, res, next) => {
 
         res.status(200).json({ success: true, data: metrics });
     } catch (error) {
-        next(error);
+        res.status(500).json({ success: false, error: error.message });
     }
 };
 

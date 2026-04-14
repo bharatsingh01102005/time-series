@@ -1,6 +1,10 @@
 const express = require('express');
-const { check } = require('express-validator');
 const router = express.Router();
+
+// ==============================================
+// Connects API endpoints with controller logic
+// ==============================================
+
 const {
     ingestMetrics,
     getRealtimeMetrics,
@@ -8,22 +12,20 @@ const {
     getDailyMetrics
 } = require('../controllers/metricController');
 
+// Route to ingest new metrics
 router.route('/')
-    .post([
-        check('cpuUsage', 'CPU usage is required and must be a number').isNumeric(),
-        check('memoryUsage', 'Memory usage is required and must be a number').isNumeric(),
-        check('temperature', 'Temperature is required and must be a number').isNumeric(),
-        check('visitors', 'Visitors is required and must be an integer').isInt(),
-        check('uptime', 'Uptime is required and must be an integer').isInt(),
-    ], ingestMetrics);
+    .post(ingestMetrics);
 
-router.route('/realtime')
+// Route for real-time metrics
+    router.route('/realtime')
     .get(getRealtimeMetrics);
 
-router.route('/hourly')
+// Route for hourly aggregated data
+    router.route('/hourly')
     .get(getHourlyMetrics);
 
-router.route('/daily')
+// Route for daily aggregated data
+    router.route('/daily')
     .get(getDailyMetrics);
 
 module.exports = router;
